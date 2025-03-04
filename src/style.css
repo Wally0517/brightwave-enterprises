@@ -2,7 +2,7 @@
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-
+  
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
@@ -13,28 +13,87 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* ✅ General Styles */
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
+  align-items: center;
   min-width: 320px;
   min-height: 100vh;
+  text-align: center;
 }
 
+/* ✅ Navbar */
+.navbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0047ff;
+  padding: 10px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navbar a:hover {
+  color: #ffd700;
+}
+
+/* ✅ Mobile Menu */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.menu {
+  display: flex;
+}
+
+@media screen and (max-width: 768px) {
+  .menu {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    background-color: #0047ff;
+  }
+
+  .menu.open {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+  }
+}
+
+/* ✅ Headings */
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  font-size: 2.5em;
+  margin-top: 80px;
+  text-align: center;
+  color: white;
 }
 
+/* ✅ Buttons */
 button {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -46,6 +105,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
@@ -54,26 +114,35 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-.card {
-  padding: 2em;
-}
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+/* ✅ Footer */
+.footer {
+  background-color: #0047ff;
+  padding: 10px;
+  font-size: 14px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
   text-align: center;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* ✅ Responsive Layout */
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
   }
-  a:hover {
-    color: #747bff;
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .navbar {
+    flex-direction: column;
+  }
+
+  .menu a {
+    display: block;
+    margin: 5px 0;
   }
 }
