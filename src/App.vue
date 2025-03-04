@@ -1,13 +1,16 @@
 <template>
-  <BridgeChat />
+  <div id="app">
+    <Navbar />
+    <router-view></router-view>
+    <Footer />
+  </div>
 </template>
 
 <script>
-import BridgeChat from './components/BridgeChat.vue';
+import Navbar from "./components/Navbar.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
-  components: {
-    BridgeChat
-  }
+  components: { Navbar, Footer },
 };
 </script>
