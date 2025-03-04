@@ -1,26 +1,70 @@
 <template>
-  <nav>
-    <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/about">About</router-link></li>
-      <li><router-link to="/projects">Projects</router-link></li>
-      <li><router-link to="/contact">Contact</router-link></li>
-    </ul>
+  <nav class="navbar">
+    <button class="menu-toggle" @click="toggleMenu">☰</button>
+    <div :class="{'menu': true, 'open': isOpen}">
+      <router-link to="/">Home</router-link>
+      <router-link to="/about">About</router-link>
+      <router-link to="/projects">Projects</router-link>
+      <router-link to="/contact">Contact</router-link>
+    </div>
   </nav>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      isOpen: false,
+    };
+  },
+  methods: {
+    toggleMenu() {
+      this.isOpen = !this.isOpen;
+    },
+  },
+};
+</script>
+
 <style>
-nav {
-  background: #0044cc;
-  padding: 1rem;
-}
-nav ul {
+/* Navbar Styles */
+.navbar {
   display: flex;
-  list-style: none;
-  gap: 1rem;
+  justify-content: center;
+  background-color: #0047ff;
+  padding: 10px;
 }
-nav ul li a {
+
+/* Menu Toggle for Mobile */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.menu a {
   color: white;
   text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    margin: 10px;
+  }
+
+  .menu {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .menu.open {
+    display: flex;
+  }
 }
 </style>
