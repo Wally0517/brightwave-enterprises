@@ -24,6 +24,17 @@ body {
   text-align: center;
 }
 
+/* ✅ Ensure the main container fills the screen properly */
+#app {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding-bottom: 60px; /* Prevent content overlap with footer */
+}
+
 /* ✅ Navbar */
 .navbar {
   display: flex;
@@ -114,7 +125,7 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* ✅ Footer */
+/* ✅ Fixed Footer (Now Fills Entire Width and Stays at Bottom) */
 .footer {
   background-color: #0047ff;
   padding: 10px;
@@ -122,6 +133,7 @@ button:focus-visible {
   width: 100%;
   position: fixed;
   bottom: 0;
+  left: 0;
   text-align: center;
 }
 
@@ -129,6 +141,11 @@ button:focus-visible {
 @media screen and (max-width: 768px) {
   h1 {
     font-size: 2rem;
+  }
+
+  .footer {
+    font-size: 12px;
+    padding: 8px;
   }
 }
 
@@ -144,5 +161,10 @@ button:focus-visible {
   .menu a {
     display: block;
     margin: 5px 0;
+  }
+
+  .footer {
+    font-size: 10px;
+    padding: 5px;
   }
 }
