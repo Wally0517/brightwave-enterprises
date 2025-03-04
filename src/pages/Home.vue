@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Hero />
+    <h1>Welcome to BrightWave Enterprises</h1>
   </div>
 </template>
 
