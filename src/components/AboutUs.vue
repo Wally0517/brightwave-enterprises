@@ -4,6 +4,7 @@
     <section class="hero-section">
       <div class="hero-content">
         <img src="@/assets/brightwave-logo.png" alt="BrightWave Logo" class="logo" />
+        <img src="/assets/hero-about.jpg" alt="Hero Image">
         <h1>About BrightWave Enterprises</h1>
         <p>Redefining student housing with comfort, security, and innovation.</p>
       </div>
