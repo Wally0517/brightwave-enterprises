@@ -1,15 +1,13 @@
 <template>
-  <div id="app">
-    <Navbar />
-    <Footer />
-  </div>
+  <BridgeChat />
 </template>
 
 <script>
-import Navbar from "./components/Navbar.vue";
-import Footer from "./components/Footer.vue";
+import BridgeChat from './components/BridgeChat.vue';
 
 export default {
-  components: { Navbar, Footer },
+  components: {
+    BridgeChat
+  }
 };
 </script>
