@@ -9,4 +9,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  server: {
+    historyApiFallback: true, // Ensures refreshing works on Vercel
+  },
+  build: {
+    outDir: "dist",
+    assetsDir: "assets",
+  },
 });
