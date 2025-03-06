@@ -19,7 +19,7 @@
       </div>
 
       <!-- Our Projects with Slideshow -->
-      <div class="section-card our-projects" @click="$router.push('/projects')">
+      <div class="section-card our-projects" @click="$router.push('/projects')" :style="projectStyle">
         <h2>Our Projects</h2>
         <p>Explore our modern student hostels and apartments.</p>
       </div>
@@ -41,11 +41,18 @@ export default {
   data() {
     return {
       projectImages: [
-        require("@/assets/project1.jpg"),
-        require("@/assets/project2.jpg")
+        require('@/assets/project1.jpg'),
+        require('@/assets/project2.jpg')
       ],
       currentProjectIndex: 0
     };
+  },
+  computed: {
+    projectStyle() {
+      return {
+        backgroundImage: `url(${this.projectImages[this.currentProjectIndex]})`
+      };
+    }
   },
   mounted() {
     this.startSlideshow();
@@ -54,7 +61,6 @@ export default {
     startSlideshow() {
       setInterval(() => {
         this.currentProjectIndex = (this.currentProjectIndex + 1) % this.projectImages.length;
-        document.querySelector(".our-projects").style.backgroundImage = `url(${this.projectImages[this.currentProjectIndex]})`;
       }, 5000); // Changes image every 5 seconds
     }
   }
@@ -141,10 +147,6 @@ export default {
 .who-we-are {
   background: url("@/assets/who-we-are.jpg") no-repeat center center/cover;
   font-weight: bold;
-}
-
-.our-projects {
-  background: url("@/assets/project1.jpg") no-repeat center center/cover;
 }
 
 .contact-us {
