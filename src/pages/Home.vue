@@ -2,7 +2,7 @@
   <div class="home">
     <!-- Hero Section -->
     <section class="hero">
-      <img src="/assets/hero-about.jpg" alt="BrightWave Enterprises" class="hero-image" />
+      <img src="@/assets/hero-about.jpg" alt="BrightWave Enterprises" class="hero-image" />
       <div class="hero-overlay">
         <h1>BrightWave Enterprises</h1>
         <p>Your trusted partner in student housing & apartment leasing.</p>
@@ -12,17 +12,21 @@
 
     <!-- Sections with Clickable Links -->
     <section class="info-sections">
+      <!-- Who We Are Section -->
       <div class="section-card who-we-are" @click="$router.push('/about')">
         <h2>Who We Are</h2>
         <p>Learn more about our mission and values.</p>
       </div>
+
+      <!-- Our Projects with Slideshow -->
       <div class="section-card our-projects" @click="$router.push('/projects')">
         <h2>Our Projects</h2>
         <p>Explore our modern student hostels and apartments.</p>
       </div>
+
+      <!-- Contact Us Section -->
       <div class="section-card contact-us" @click="$router.push('/contact')">
-        <h2>Contact Us</h2>
-        <p>Get in touch with us for leasing inquiries.</p>
+        <img src="@/assets/customer-service.png" alt="Contact Us" class="contact-icon" />
         <router-link to="/contact" class="contact-link">Contact Us</router-link>
       </div>
     </section>
@@ -32,6 +36,26 @@
 <script>
 export default {
   name: "HomePage",
+  data() {
+    return {
+      projectImages: [
+        require("@/assets/project1.jpg"),
+        require("@/assets/project2.jpg")
+      ],
+      currentProjectIndex: 0
+    };
+  },
+  mounted() {
+    this.startSlideshow();
+  },
+  methods: {
+    startSlideshow() {
+      setInterval(() => {
+        this.currentProjectIndex = (this.currentProjectIndex + 1) % this.projectImages.length;
+        document.querySelector(".our-projects").style.backgroundImage = `url(${this.projectImages[this.currentProjectIndex]})`;
+      }, 5000); // Changes image every 5 seconds
+    }
+  }
 };
 </script>
 
@@ -90,16 +114,20 @@ export default {
 }
 
 .section-card {
-  background: #f4f4f4;
+  position: relative;
+  background: rgba(0, 0, 0, 0.7);
   padding: 20px;
   border-radius: 8px;
   width: 30%;
   cursor: pointer;
   transition: transform 0.3s ease;
+  color: white;
   text-align: center;
+  background-size: cover;
+  background-position: center;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
 }
 
@@ -107,41 +135,46 @@ export default {
   transform: scale(1.05);
 }
 
-.section-card h2 {
-  margin-bottom: 10px;
-  font-weight: bold;
-  color: black;
-}
-
+/* Backgrounds for Sections */
 .who-we-are {
-  background: url('/assets/who-we-are.jpg') no-repeat center center/cover;
+  background: url("@/assets/who-we-are.jpg") no-repeat center center/cover;
+  font-weight: bold;
+  color: #fff;
 }
 
 .our-projects {
-  background: url('/assets/project1.jpg') no-repeat center center/cover;
-  animation: slideProjects 6s infinite alternate;
+  background: url("@/assets/project1.jpg") no-repeat center center/cover;
 }
 
 .contact-us {
   background: none;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 10px;
 }
 
 .contact-link {
-  margin-top: 10px;
-  display: inline-block;
-  padding: 8px 15px;
-  background-color: #0047ff;
-  color: white;
-  border-radius: 5px;
+  color: #0047ff;
   text-decoration: none;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
-@keyframes slideProjects {
-  0% {
-    background: url('/assets/project1.jpg') no-repeat center center/cover;
-  }
-  50% {
-    background: url('/assets/project2.jpg') no-repeat center center/cover;
-  }
+.section-card h2 {
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.section-card p {
+  font-size: 1rem;
 }
 </style>
