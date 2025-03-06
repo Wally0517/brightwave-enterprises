@@ -12,15 +12,20 @@
 
     <!-- Sections with Clickable Links -->
     <section class="info-sections">
-      <div class="section-card" @click="$router.push('/about')">
+      <!-- Who We Are Section -->
+      <div class="section-card who-we-are" @click="$router.push('/about')">
         <h2>Who We Are</h2>
         <p>Learn more about our mission and values.</p>
       </div>
-      <div class="section-card" @click="$router.push('/projects')">
+
+      <!-- Our Projects with Slideshow -->
+      <div class="section-card our-projects" @click="$router.push('/projects')">
         <h2>Our Projects</h2>
         <p>Explore our modern student hostels and apartments.</p>
       </div>
-      <div class="section-card" @click="$router.push('/contact')">
+
+      <!-- Contact Us Section -->
+      <div class="section-card contact-us" @click="$router.push('/contact')">
         <h2>Contact Us</h2>
         <p>Get in touch with us for leasing inquiries.</p>
       </div>
@@ -31,6 +36,26 @@
 <script>
 export default {
   name: "HomePage",
+  data() {
+    return {
+      projectImages: [
+        "@/assets/project1.jpg",
+        "@/assets/project2.jpg"
+      ],
+      currentProjectIndex: 0
+    };
+  },
+  mounted() {
+    this.startSlideshow();
+  },
+  methods: {
+    startSlideshow() {
+      setInterval(() => {
+        this.currentProjectIndex = (this.currentProjectIndex + 1) % this.projectImages.length;
+        document.querySelector(".our-projects").style.backgroundImage = `url(${this.projectImages[this.currentProjectIndex]})`;
+      }, 5000); // Changes image every 5 seconds
+    }
+  }
 };
 </script>
 
@@ -89,19 +114,51 @@ export default {
 }
 
 .section-card {
-  background: #f4f4f4;
+  position: relative;
+  background: rgba(0, 0, 0, 0.7);
   padding: 20px;
   border-radius: 8px;
   width: 30%;
   cursor: pointer;
   transition: transform 0.3s ease;
+  color: white;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section-card:hover {
   transform: scale(1.05);
 }
 
+/* Backgrounds for Sections */
+.who-we-are {
+  background: url("@/assets/who-we-are.jpg") no-repeat center center/cover;
+}
+
+.our-projects {
+  background: url("@/assets/project1.jpg") no-repeat center center/cover;
+}
+
+.contact-us {
+  background: url("@/assets/customer-service.png") no-repeat center center/contain;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .section-card h2 {
   margin-bottom: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.section-card p {
+  font-size: 1rem;
 }
 </style>
