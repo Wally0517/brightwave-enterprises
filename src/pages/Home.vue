@@ -14,7 +14,7 @@
     <section class="info-sections">
       <!-- Who We Are Section -->
       <div class="section-card who-we-are" @click="$router.push('/about')">
-        <h2>Who We Are</h2>
+        <h2 class="bold-text">Who We Are</h2>
         <p>Learn more about our mission and values.</p>
       </div>
 
@@ -25,9 +25,11 @@
       </div>
 
       <!-- Contact Us Section -->
-      <div class="section-card contact-us" @click="$router.push('/contact')">
-        <img src="@/assets/customer-service.png" alt="Contact Us" class="contact-icon" />
-        <router-link to="/contact" class="contact-link">Contact Us</router-link>
+      <div class="section-card contact-us">
+        <img src="@/assets/customer-service.png" alt="Customer Service" class="contact-icon" />
+        <h2>Contact Us</h2>
+        <p>Get in touch with us for leasing inquiries.</p>
+        <router-link to="/contact" class="contact-btn">Reach Out</router-link>
       </div>
     </section>
   </div>
@@ -139,7 +141,6 @@ export default {
 .who-we-are {
   background: url("@/assets/who-we-are.jpg") no-repeat center center/cover;
   font-weight: bold;
-  color: #fff;
 }
 
 .our-projects {
@@ -148,7 +149,6 @@ export default {
 
 .contact-us {
   background: none;
-  background-color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -156,25 +156,23 @@ export default {
 }
 
 .contact-icon {
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: auto;
   margin-bottom: 10px;
 }
 
-.contact-link {
-  color: #0047ff;
+.contact-btn {
+  background-color: #0047ff;
+  color: white;
+  padding: 8px 15px;
   text-decoration: none;
-  font-size: 1.2rem;
-  font-weight: bold;
+  border-radius: 5px;
+  margin-top: 10px;
+  display: inline-block;
 }
 
-.section-card h2 {
-  margin-bottom: 10px;
-  font-size: 1.8rem;
+.bold-text {
   font-weight: bold;
-}
-
-.section-card p {
-  font-size: 1rem;
+  color: white;
 }
 </style>
