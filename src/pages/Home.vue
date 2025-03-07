@@ -2,7 +2,7 @@
   <div class="home">
     <!-- Hero Section -->
     <section class="hero">
-      <img src="@/assets/hero-about.jpg" alt="BrightWave Enterprises" class="hero-image" />
+      <img :src="heroImage" alt="BrightWave Enterprises" class="hero-image" />
       <div class="hero-overlay">
         <h1>BrightWave Enterprises</h1>
         <p>Your trusted partner in student housing & apartment leasing.</p>
@@ -20,14 +20,14 @@
 
       <!-- Our Projects with Slideshow -->
       <div class="section-card our-projects" @click="$router.push('/projects')" :style="projectStyle">
-        <h2>Our Projects</h2>
+        <h2 class="bold-text">Our Projects</h2>
         <p>Explore our modern student hostels and apartments.</p>
       </div>
 
       <!-- Contact Us Section -->
       <div class="section-card contact-us">
-        <img src="@/assets/customer-service.png" alt="Customer Service" class="contact-icon" />
-        <h2>Contact Us</h2>
+        <img :src="contactIcon" alt="Customer Service" class="contact-icon" />
+        <h2 class="bold-text">Contact Us</h2>
         <p>Get in touch with us for leasing inquiries.</p>
         <router-link to="/contact" class="contact-btn">Reach Out</router-link>
       </div>
@@ -40,9 +40,11 @@ export default {
   name: "HomePage",
   data() {
     return {
+      heroImage: new URL('@/assets/hero-about.jpg', import.meta.url).href,
+      contactIcon: new URL('@/assets/customer-service.png', import.meta.url).href,
       projectImages: [
-        require('@/assets/project1.jpg'),
-        require('@/assets/project2.jpg')
+        new URL('@/assets/project1.jpg', import.meta.url).href,
+        new URL('@/assets/project2.jpg', import.meta.url).href
       ],
       currentProjectIndex: 0
     };
