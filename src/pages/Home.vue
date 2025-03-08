@@ -11,30 +11,13 @@
     </section>
 
     <!-- About Us Section -->
-    <section class="about-us">
+    <section class="about-us" :style="aboutUsStyle">
       <h2>Who We Are</h2>
       <p>BrightWave Enterprises is committed to providing modern student housing and apartment leasing solutions.</p>
       <router-link to="/about" class="btn">Read More</router-link>
     </section>
 
-    <!-- Our Services Section -->
-    <section class="services">
-      <h2>Our Services</h2>
-      <div class="services-container">
-        <div class="service-card">
-          <img src="@/assets/customer-service.png" alt="Service 1" />
-          <h3>Student Housing</h3>
-          <p>Safe and modern student hostels for comfortable living.</p>
-        </div>
-        <div class="service-card">
-          <img src="@/assets/customer-service.png" alt="Service 2" />
-          <h3>Apartment Leasing</h3>
-          <p>Flexible leasing solutions to match your needs.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Our Projects with Slideshow -->
+    <!-- Our Projects Section -->
     <section class="our-projects">
       <h2>Our Projects</h2>
       <div class="project-slideshow" :style="projectStyle"></div>
@@ -85,14 +68,17 @@ export default {
         backgroundImage: `url(${this.projectImages[this.currentProjectIndex]})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        transition: 'background-image 1s ease-in-out'
+        transition: 'background-image 1s ease-in-out',
+        height: '400px'
       };
     },
     aboutUsStyle() {
       return {
         backgroundImage: `url(${aboutUsImage})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center'
+        backgroundPosition: 'center',
+        color: '#fff',
+        padding: '50px 20px'
       };
     }
   },
@@ -151,30 +137,15 @@ export default {
   margin-top: 10px;
 }
 
-.about-us, .services, .our-projects, .testimonials, .contact-us {
+.about-us, .our-projects, .testimonials, .contact-us {
   padding: 40px 20px;
   background: #f4f4f4;
   margin: 20px 0;
 }
 
-.services-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.service-card {
-  width: 30%;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
 .project-slideshow {
   width: 100%;
-  height: 300px;
+  height: 400px;
   background-size: cover;
   background-position: center;
   transition: background-image 1s ease-in-out;
