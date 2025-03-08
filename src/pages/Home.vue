@@ -2,7 +2,7 @@
   <div class="home">
     <!-- Hero Section -->
     <section class="hero">
-      <img :src="heroImage" alt="BrightWave Enterprises" class="hero-image" />
+      <img src="@/assets/hero-about.jpg" alt="BrightWave Enterprises" class="hero-image" />
       <div class="hero-overlay">
         <h1>BrightWave Enterprises</h1>
         <p>Your trusted partner in student housing & apartment leasing.</p>
@@ -10,26 +10,51 @@
       </div>
     </section>
 
-    <!-- Sections with Clickable Links -->
-    <section class="info-sections">
-      <!-- Who We Are Section -->
-      <div class="section-card who-we-are" @click="$router.push('/about')">
-        <h2 class="bold-text">Who We Are</h2>
-        <p>Learn more about our mission and values.</p>
-      </div>
+    <!-- About Us Section -->
+    <section class="about-us">
+      <h2>Who We Are</h2>
+      <p>BrightWave Enterprises is committed to providing modern student housing and apartment leasing solutions.</p>
+      <router-link to="/about" class="btn">Read More</router-link>
+    </section>
 
-      <!-- Our Projects with Slideshow -->
-      <div class="section-card our-projects" @click="$router.push('/projects')" :style="projectStyle">
-        <h2 class="bold-text">Our Projects</h2>
-        <p>Explore our modern student hostels and apartments.</p>
+    <!-- Our Services Section -->
+    <section class="services">
+      <h2>Our Services</h2>
+      <div class="services-container">
+        <div class="service-card">
+          <img src="@/assets/service1.png" alt="Service 1" />
+          <h3>Student Housing</h3>
+          <p>Safe and modern student hostels for comfortable living.</p>
+        </div>
+        <div class="service-card">
+          <img src="@/assets/service2.png" alt="Service 2" />
+          <h3>Apartment Leasing</h3>
+          <p>Flexible leasing solutions to match your needs.</p>
+        </div>
       </div>
+    </section>
 
-      <!-- Contact Us Section -->
-      <div class="section-card contact-us">
-        <img :src="contactIcon" alt="Customer Service" class="contact-icon" />
-        <h2 class="bold-text">Contact Us</h2>
-        <p>Get in touch with us for leasing inquiries.</p>
-        <router-link to="/contact" class="contact-btn">Reach Out</router-link>
+    <!-- Our Projects with Slideshow -->
+    <section class="our-projects">
+      <h2>Our Projects</h2>
+      <div class="project-slideshow" :style="projectStyle"></div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <h2>What Our Clients Say</h2>
+      <div class="testimonial-slider">
+        <p>{{ testimonials[currentTestimonialIndex] }}</p>
+      </div>
+    </section>
+
+    <!-- Contact Us Section -->
+    <section class="contact-us">
+      <h2>Contact Us</h2>
+      <p>Get in touch with us for leasing inquiries.</p>
+      <div class="contact-options">
+        <img src="@/assets/customer-service.png" alt="Customer Service" class="contact-icon" />
+        <router-link to="/contact" class="btn">Reach Out</router-link>
       </div>
     </section>
   </div>
@@ -40,13 +65,17 @@ export default {
   name: "HomePage",
   data() {
     return {
-      heroImage: new URL('@/assets/hero-about.jpg', import.meta.url).href,
-      contactIcon: new URL('@/assets/customer-service.png', import.meta.url).href,
       projectImages: [
-        new URL('@/assets/project1.jpg', import.meta.url).href,
-        new URL('@/assets/project2.jpg', import.meta.url).href
+        require('@/assets/project1.jpg'),
+        require('@/assets/project2.jpg')
       ],
-      currentProjectIndex: 0
+      currentProjectIndex: 0,
+      testimonials: [
+        "BrightWave Enterprises made finding student housing so easy! Highly recommend.",
+        "The leasing process was smooth, and the apartments are well maintained!",
+        "Professional and reliable service from BrightWave!"
+      ],
+      currentTestimonialIndex: 0
     };
   },
   computed: {
@@ -58,12 +87,18 @@ export default {
   },
   mounted() {
     this.startSlideshow();
+    this.startTestimonials();
   },
   methods: {
     startSlideshow() {
       setInterval(() => {
         this.currentProjectIndex = (this.currentProjectIndex + 1) % this.projectImages.length;
-      }, 5000); // Changes image every 5 seconds
+      }, 5000);
+    },
+    startTestimonials() {
+      setInterval(() => {
+        this.currentTestimonialIndex = (this.currentTestimonialIndex + 1) % this.testimonials.length;
+      }, 4000);
     }
   }
 };
@@ -74,7 +109,6 @@ export default {
   text-align: center;
 }
 
-/* Hero Section */
 .hero {
   position: relative;
   width: 100%;
@@ -96,15 +130,6 @@ export default {
   text-align: center;
 }
 
-.hero-overlay h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-.hero-overlay p {
-  font-size: 1.2rem;
-}
-
 .btn {
   background-color: #0047ff;
   color: white;
@@ -115,68 +140,53 @@ export default {
   margin-top: 10px;
 }
 
-/* Sections */
-.info-sections {
+.about-us, .services, .our-projects, .testimonials, .contact-us {
+  padding: 40px 20px;
+  background: #f4f4f4;
+  margin: 20px 0;
+}
+
+.services-container {
   display: flex;
   justify-content: center;
   gap: 20px;
-  margin-top: 40px;
 }
 
-.section-card {
-  position: relative;
-  background: rgba(0, 0, 0, 0.7);
+.service-card {
+  width: 30%;
+  background: white;
   padding: 20px;
   border-radius: 8px;
-  width: 30%;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  color: white;
   text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.project-slideshow {
+  width: 100%;
+  height: 300px;
   background-size: cover;
   background-position: center;
-  min-height: 150px;
+  transition: background-image 0.5s ease-in-out;
+}
+
+.testimonial-slider {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto;
+}
+
+.contact-options {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-}
-
-.section-card:hover {
-  transform: scale(1.05);
-}
-
-/* Backgrounds for Sections */
-.who-we-are {
-  background: url("@/assets/who-we-are.jpg") no-repeat center center/cover;
-  font-weight: bold;
-}
-
-.contact-us {
-  background: none;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .contact-icon {
-  width: 80px;
+  width: 100px;
   height: auto;
   margin-bottom: 10px;
-}
-
-.contact-btn {
-  background-color: #0047ff;
-  color: white;
-  padding: 8px 15px;
-  text-decoration: none;
-  border-radius: 5px;
-  margin-top: 10px;
-  display: inline-block;
-}
-
-.bold-text {
-  font-weight: bold;
-  color: white;
 }
 </style>
