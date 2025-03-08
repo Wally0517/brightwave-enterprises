@@ -17,24 +17,7 @@
       <router-link to="/about" class="btn">Read More</router-link>
     </section>
 
-    <!-- Our Services Section -->
-    <section class="services">
-      <h2>Our Services</h2>
-      <div class="services-container">
-        <div class="service-card">
-          <img src="@/assets/service1.png" alt="Student Housing" />
-          <h3>Student Housing</h3>
-          <p>Safe and modern student hostels for comfortable living.</p>
-        </div>
-        <div class="service-card">
-          <img src="@/assets/service2.png" alt="Apartment Leasing" />
-          <h3>Apartment Leasing</h3>
-          <p>Flexible leasing solutions to match your needs.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Our Projects with Slideshow -->
+    <!-- Our Projects Section with Slideshow -->
     <section class="our-projects">
       <h2>Our Projects</h2>
       <div class="project-slideshow" :style="projectStyle"></div>
@@ -66,8 +49,8 @@ export default {
   data() {
     return {
       projectImages: [
-        new URL('@/assets/project1.jpg', import.meta.url).href,
-        new URL('@/assets/project2.jpg', import.meta.url).href
+        "/assets/project1.jpg",
+        "/assets/project2.jpg"
       ],
       currentProjectIndex: 0,
       testimonials: [
@@ -141,30 +124,14 @@ export default {
   margin-top: 10px;
 }
 
-/* About, Services, Projects, Testimonials, Contact Sections */
-.about-us, .services, .our-projects, .testimonials, .contact-us {
+/* Sections */
+.about-us, .our-projects, .testimonials, .contact-us {
   padding: 40px 20px;
   background: #f4f4f4;
   margin: 20px 0;
 }
 
-/* Services */
-.services-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.service-card {
-  width: 30%;
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Slideshow */
+/* Project Slideshow */
 .project-slideshow {
   width: 100%;
   height: 300px;
@@ -183,7 +150,7 @@ export default {
   margin: auto;
 }
 
-/* Contact */
+/* Contact Us */
 .contact-options {
   display: flex;
   flex-direction: column;
@@ -191,7 +158,7 @@ export default {
 }
 
 .contact-icon {
-  width: 100px;
+  width: 120px;
   height: auto;
   margin-bottom: 10px;
 }
