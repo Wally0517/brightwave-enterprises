@@ -12,12 +12,14 @@
 
     <!-- About Us Section -->
     <section class="about-us" :style="aboutUsStyle">
-      <h2>Who We Are</h2>
-      <p>BrightWave Enterprises is committed to providing modern student housing and apartment leasing solutions.</p>
-      <router-link to="/about" class="btn">Read More</router-link>
+      <div class="overlay">
+        <h2>Who We Are</h2>
+        <p>BrightWave Enterprises is committed to providing modern student housing and apartment leasing solutions.</p>
+        <router-link to="/about" class="btn">Read More</router-link>
+      </div>
     </section>
 
-    <!-- Our Projects Section -->
+    <!-- Our Projects with Slideshow -->
     <section class="our-projects">
       <h2>Our Projects</h2>
       <div class="project-slideshow" :style="projectStyle"></div>
@@ -68,8 +70,7 @@ export default {
         backgroundImage: `url(${this.projectImages[this.currentProjectIndex]})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        transition: 'background-image 1s ease-in-out',
-        height: '400px'
+        transition: 'background-image 1s ease-in-out'
       };
     },
     aboutUsStyle() {
@@ -77,8 +78,12 @@ export default {
         backgroundImage: `url(${aboutUsImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        color: '#fff',
-        padding: '50px 20px'
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        textAlign: 'center',
+        padding: '60px 20px'
       };
     }
   },
@@ -130,14 +135,29 @@ export default {
 .btn {
   background-color: #0047ff;
   color: white;
-  padding: 10px 20px;
+  padding: 12px 24px;
   text-decoration: none;
   border-radius: 5px;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 12px;
+  font-size: 1rem;
 }
 
-.about-us, .our-projects, .testimonials, .contact-us {
+.about-us {
+  position: relative;
+  padding: 80px 20px;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 30px;
+  border-radius: 10px;
+  color: white;
+  max-width: 600px;
+  margin: auto;
+}
+
+.our-projects {
   padding: 40px 20px;
   background: #f4f4f4;
   margin: 20px 0;
@@ -145,7 +165,7 @@ export default {
 
 .project-slideshow {
   width: 100%;
-  height: 400px;
+  height: 300px;
   background-size: cover;
   background-position: center;
   transition: background-image 1s ease-in-out;
