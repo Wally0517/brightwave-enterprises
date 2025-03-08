@@ -11,16 +11,32 @@
     </section>
 
     <!-- About Us Section -->
-    <section class="about-us">
+    <section class="about-us" :style="aboutUsStyle">
       <h2>Who We Are</h2>
       <p>BrightWave Enterprises is committed to providing modern student housing and apartment leasing solutions.</p>
       <router-link to="/about" class="btn">Read More</router-link>
     </section>
 
-    <!-- Our Projects Section with Slideshow -->
-    <section class="our-projects">
+    <!-- Our Services Section -->
+    <section class="services">
+      <h2>Our Services</h2>
+      <div class="services-container">
+        <div class="service-card">
+          <img src="@/assets/customer-service.png" alt="Service 1" />
+          <h3>Student Housing</h3>
+          <p>Safe and modern student hostels for comfortable living.</p>
+        </div>
+        <div class="service-card">
+          <img src="@/assets/customer-service.png" alt="Service 2" />
+          <h3>Apartment Leasing</h3>
+          <p>Flexible leasing solutions to match your needs.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Our Projects with Slideshow -->
+    <section class="our-projects" :style="projectStyle">
       <h2>Our Projects</h2>
-      <div class="project-slideshow" :style="projectStyle"></div>
     </section>
 
     <!-- Testimonials Section -->
@@ -49,8 +65,8 @@ export default {
   data() {
     return {
       projectImages: [
-        "/assets/project1.jpg",
-        "/assets/project2.jpg"
+        require('@/assets/project1.jpg'),
+        require('@/assets/project2.jpg')
       ],
       currentProjectIndex: 0,
       testimonials: [
@@ -64,7 +80,17 @@ export default {
   computed: {
     projectStyle() {
       return {
-        backgroundImage: `url(${this.projectImages[this.currentProjectIndex]})`
+        backgroundImage: `url(${this.projectImages[this.currentProjectIndex]})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        transition: 'background-image 1s ease-in-out'
+      };
+    },
+    aboutUsStyle() {
+      return {
+        backgroundImage: `url(@/assets/who-we-are.jpg)`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       };
     }
   },
@@ -92,7 +118,6 @@ export default {
   text-align: center;
 }
 
-/* Hero Section */
 .hero {
   position: relative;
   width: 100%;
@@ -124,23 +149,35 @@ export default {
   margin-top: 10px;
 }
 
-/* Sections */
-.about-us, .our-projects, .testimonials, .contact-us {
+.about-us, .services, .our-projects, .testimonials, .contact-us {
   padding: 40px 20px;
   background: #f4f4f4;
   margin: 20px 0;
 }
 
-/* Project Slideshow */
+.services-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.service-card {
+  width: 30%;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .project-slideshow {
   width: 100%;
   height: 300px;
   background-size: cover;
   background-position: center;
-  transition: background-image 0.5s ease-in-out;
+  transition: background-image 1s ease-in-out;
 }
 
-/* Testimonials */
 .testimonial-slider {
   background: white;
   padding: 20px;
@@ -150,7 +187,6 @@ export default {
   margin: auto;
 }
 
-/* Contact Us */
 .contact-options {
   display: flex;
   flex-direction: column;
@@ -158,7 +194,7 @@ export default {
 }
 
 .contact-icon {
-  width: 120px;
+  width: 100px;
   height: auto;
   margin-bottom: 10px;
 }
