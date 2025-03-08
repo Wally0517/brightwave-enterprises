@@ -11,7 +11,7 @@
     </section>
 
     <!-- About Us Section -->
-    <section class="about-us" :style="aboutUsStyle">
+    <section class="about-us">
       <h2>Who We Are</h2>
       <p>BrightWave Enterprises is committed to providing modern student housing and apartment leasing solutions.</p>
       <router-link to="/about" class="btn">Read More</router-link>
@@ -35,8 +35,9 @@
     </section>
 
     <!-- Our Projects with Slideshow -->
-    <section class="our-projects" :style="projectStyle">
+    <section class="our-projects">
       <h2>Our Projects</h2>
+      <div class="project-slideshow" :style="projectStyle"></div>
     </section>
 
     <!-- Testimonials Section -->
@@ -60,14 +61,15 @@
 </template>
 
 <script>
+import project1 from "@/assets/project1.jpg";
+import project2 from "@/assets/project2.jpg";
+import aboutUsImage from "@/assets/who-we-are.jpg";
+
 export default {
   name: "HomePage",
   data() {
     return {
-      projectImages: [
-        require('@/assets/project1.jpg'),
-        require('@/assets/project2.jpg')
-      ],
+      projectImages: [project1, project2],
       currentProjectIndex: 0,
       testimonials: [
         "BrightWave Enterprises made finding student housing so easy! Highly recommend.",
@@ -88,7 +90,7 @@ export default {
     },
     aboutUsStyle() {
       return {
-        backgroundImage: `url(@/assets/who-we-are.jpg)`,
+        backgroundImage: `url(${aboutUsImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       };
