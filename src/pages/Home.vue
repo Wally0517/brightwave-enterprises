@@ -46,28 +46,26 @@
 </template>
 
 <script>
-import project1 from "@/assets/project1.jpg";
-import project2 from "@/assets/project2.jpg";
-import aboutUsImage from "@/assets/who-we-are.jpg";
+import { db } from "@/firebase";  
+import { doc, getDoc } from "firebase/firestore";
 
 export default {
   name: "HomePage",
   data() {
     return {
-      projectImages: [project1, project2],
+      whoWeAreTitle: "",
+      whoWeAreText: "",
+      projectImages: [],
+      testimonials: [],
+      contactUsText: "",
       currentProjectIndex: 0,
-      testimonials: [
-        "BrightWave Enterprises made finding student housing so easy! Highly recommend.",
-        "The leasing process was smooth, and the apartments are well maintained!",
-        "Professional and reliable service from BrightWave!"
-      ],
       currentTestimonialIndex: 0
     };
   },
   computed: {
     projectStyle() {
       return {
-        backgroundImage: `url(${this.projectImages[this.currentProjectIndex]})`,
+        backgroundImage: `url(${this.projectImages[this.currentProjectIndex] || ''})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         transition: 'background-image 1s ease-in-out'
@@ -75,7 +73,7 @@ export default {
     },
     aboutUsStyle() {
       return {
-        backgroundImage: `url(${aboutUsImage})`,
+        backgroundImage: `url(@/assets/who-we-are.jpg)`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         color: 'white',
@@ -87,20 +85,44 @@ export default {
       };
     }
   },
-  mounted() {
+  async mounted() {
+    await this.fetchData();
     this.startSlideshow();
     this.startTestimonials();
   },
   methods: {
+    async fetchData() {
+      try {
+        const docRef = doc(db, "siteContent", "homepage");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          this.whoWeAreTitle = data.whoWeAreTitle || "Who We Are";
+          this.whoWeAreText = data.whoWeAreText || "BrightWave Enterprises is committed to providing modern student housing and apartment leasing solutions.";
+          this.projectImages = data.projectImages || [];
+          this.testimonials = data.testimonials || [];
+          this.contactUsText = data.contactUsText || "Get in touch with us for leasing inquiries.";
+        } else {
+          console.error("No data found in Firestore!");
+        }
+      } catch (error) {
+        console.error("Error fetching data from Firestore:", error);
+      }
+    },
     startSlideshow() {
-      setInterval(() => {
-        this.currentProjectIndex = (this.currentProjectIndex + 1) % this.projectImages.length;
-      }, 5000);
+      if (this.projectImages.length > 1) {
+        setInterval(() => {
+          this.currentProjectIndex = (this.currentProjectIndex + 1) % this.projectImages.length;
+        }, 5000);
+      }
     },
     startTestimonials() {
-      setInterval(() => {
-        this.currentTestimonialIndex = (this.currentTestimonialIndex + 1) % this.testimonials.length;
-      }, 4000);
+      if (this.testimonials.length > 1) {
+        setInterval(() => {
+          this.currentTestimonialIndex = (this.currentTestimonialIndex + 1) % this.testimonials.length;
+        }, 4000);
+      }
     }
   }
 };
