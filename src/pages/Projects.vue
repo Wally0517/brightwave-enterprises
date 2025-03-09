@@ -10,33 +10,27 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { ref, onMounted } from "vue";
-import { db } from "@/firebase";
+import { db } from "../firebase"; // ✅ Adjusted import path
 import { doc, getDoc } from "firebase/firestore";
 
-export default {
-  setup() {
-    const projectImages = ref([]);
+const projectImages = ref([]);
 
-    async function fetchProjects() {
-      try {
-        const docRef = doc(db, "siteContent", "projects");
-        const docSnap = await getDoc(docRef);
+async function fetchProjects() {
+  try {
+    const docRef = doc(db, "siteContent", "projects");
+    const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-          projectImages.value = docSnap.data().projectImages || [];
-        }
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
+    if (docSnap.exists()) {
+      projectImages.value = docSnap.data().projectImages || [];
     }
-
-    onMounted(fetchProjects);
-
-    return { projectImages };
+  } catch (error) {
+    console.error("Error fetching projects:", error);
   }
-};
+}
+
+onMounted(fetchProjects);
 </script>
 
 <style scoped>
