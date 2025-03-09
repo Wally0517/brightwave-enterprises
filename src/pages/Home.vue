@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import { db } from "../firebase";  // ✅ Import Firestore connection
-import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { db } from "@/firebase";  
+import { doc, getDoc } from "firebase/firestore";
 
 export default {
   name: "HomePage",
