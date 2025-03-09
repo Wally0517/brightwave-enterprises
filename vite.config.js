@@ -9,11 +9,14 @@ export default defineConfig({
       "@": path.resolve(__dirname, "src"),
     },
   },
+  define: {
+    "process.env": {}
+  },
   server: {
-    historyApiFallback: true, // Ensures refreshing works on Vercel
+    historyApiFallback: true, // Fix for Vercel routing issues
   },
   build: {
     outDir: "dist",
     assetsDir: "assets",
-  },
+  }
 });
