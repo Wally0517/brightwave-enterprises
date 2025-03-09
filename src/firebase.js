@@ -1,21 +1,16 @@
-// Import Firebase SDK
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// Your Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAi1sihWQN_xYnOUQws4H4vRNwTPLSM15s",
-  authDomain: "brightwave-enterprises-1595c.firebaseapp.com",
-  projectId: "brightwave-enterprises-1595c",
-  storageBucket: "brightwave-enterprises-1595c.appspot.com",
-  messagingSenderId: "220593451885",
-  appId: "1:220593451885:web:17847709e35ef9f5412064",
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Firestore database
 const db = getFirestore(app);
 
 export { db };
