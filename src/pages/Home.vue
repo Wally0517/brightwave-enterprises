@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { db } from "@/firebase";  
+import { db } from "../firebase"; // Adjust path if needed  
 import { doc, getDoc } from "firebase/firestore";
 
 export default {
