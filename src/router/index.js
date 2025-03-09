@@ -3,7 +3,7 @@ import Home from "@/pages/Home.vue";
 import About from "@/pages/About.vue";
 import Projects from "@/pages/Projects.vue";
 import Contact from "@/pages/Contact.vue";
-import Admin from "@/views/Admin.vue";
+import Admin from "../views/Admin.vue";  // Relative path method
 
 const routes = [
   { path: "/", name: "Home", component: Home },
