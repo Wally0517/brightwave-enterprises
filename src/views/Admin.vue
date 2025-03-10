@@ -68,7 +68,7 @@
 
 <script>
 import { ref, onMounted } from "vue";
-import { auth, db } from "@/firebase";
+import { auth, db } from "@/firebase"; // ✅ Make sure auth is correctly imported
 import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
